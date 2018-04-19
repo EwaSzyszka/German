@@ -22,7 +22,7 @@ def get_most_popular():
     hash_fame = []   
 
     for word in most_popular:
-        hash_object = hashlib.md5(word.encode('utf-8'))
+        hash_object = hashlib.md5(word.encode('ascii','replace'))
         hash_fame.append(hash_object.hexdigest())
 
     return hash_fame
@@ -31,7 +31,7 @@ def check_popularity(article, popularity_hash):
     estential_vocab = []
     for word in article.split():
         #for every word in a new article compute a hash function and see if it is in the hash_fame
-        hash_object = hashlib.md5(word.encode('utf-8'))
+        hash_object = hashlib.md5(word.encode('ascii','replace'))
         #print(hash_object.hexdigest()), word
         if (hash_object.hexdigest()) in popularity_hash:
             # print("fam"), word
@@ -39,5 +39,7 @@ def check_popularity(article, popularity_hash):
 
     #from the article that you pasted all the unique 
     # print np.unique(estential_vocab)  
+    return estential_vocab
+    
 
-    return len(np.unique(estential_vocab)) > 2
+    
